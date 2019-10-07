@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<style>
+body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+  color:#f1f1f1;
+}
+.navbar-inverse{
+    color: #FFFFFF;
+    background-color: #f1f1f1;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: black;
+}
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 160px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+ 
+.sidebar a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+div.content {
+  margin-left: 160px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+.column {
+ /* max-width: 100%;
+       display: flex;
+       min-height: 207px
+       padding: 0 4px;
+       */
+    transition: "all 0.3s ease",
+    width: "92%",
+    backgroundImage: "linear-gradient(right, white 80%, #E9EBEC 20%)",
+    borderRadius: 8,
+    border: "1px solid",
+    borderColor: "#E9EBEC",
+    margin: "2%",
+    padding: "2%",
+    ":hover": {
+      "-webkit-transform": "scale(1.05)",
+      " -ms-transform": "scale(1.05)",
+      transform: "scale(1.05)"
+    
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+}
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+
+.file-field.medium .file-path-wrapper {
+height: 3rem; }
+.file-field.medium .file-path-wrapper .file-path {
+height: 2.8rem; }
+
+.file-field.big-2 .file-path-wrapper {
+height: 3.7rem; }
+.file-field.big-2 .file-path-wrapper .file-path {
+height: 3.5rem; }
+
+.button2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #008CBA;
+}
+
+.button2:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+input[type="file"] { 
+  z-index: -1;
+  position: absolute;
+  opacity: 0;
+}
+
+input:focus + label {
+  outline: 2px solid;
+}
+
+
+
+</style>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid" color="black"></div>
+    <div class="navbar-header"></div>
+  </nav>
+
+<form method="POST">{% csrf_token %}
+  <input type="file" id="file-upload" multiple required style="color:black" name="photo" accept="image/png, image/jpeg">
+  <div id="file-upload-filename" style="color:black"></div>
+     <button>Submit</button>
+</form>
+{% if response1 %}
+       {{response1}} 
+{% endif %}
+
+
+
+
+
+<div class="sidebar">
+<div style="display:table-cell; padding-left:40px; padding-right:40px; padding-top:50px;padding-bottom:20px;">
+<img src="./imgs/gphoto.jpg" width="80px" height="80px"  >
+    </div>
+    <div text-align="center">
+  <a class="Photos" href="#main" text-align="center">Photos</a>
+  <a href="#Albums" text-align="center">Albums</a>
+  <a href="#Assisstant" >Photo Assisstant</a>
+</div>
+</div>
+
+<div class="content">
+  <div class="column">
+    <img src="./imgs/underwater.jpg" style="width:450px; height=100px">
+    <img src="./imgs/ocean.jpg" style="width:450px; height=100px;">
+    <img src="./imgs/wedding.jpg" style="width:450px; height=100px">
+    <img src="./imgs/rocks.jpg" style="width:450px; height=50%">
+    <img src="./imgs/underwater.jpg" style="width:450px; height=50%">
+  </div> 
+</div>
+
+<script>
+var input = document.getElementById( 'file-upload' );
+var infoArea = document.getElementById( 'file-upload-filename' );
+
+input.addEventListener( 'change', showFileName );
+
+function showFileName( event ) {
+  
+  // the change event gives us the input it occurred in 
+  var input = event.srcElement;
+  
+  // the input has an array of files in the `files` property, each one has a name that you can use. We're just using the name here.
+  var fileName = input.files[0].name;
+  
+  // use fileName however fits your app best, i.e. add it into a div
+  infoArea.textContent = 'File name: ' + fileName;
+}
+</script>
+</body>
+</html>
